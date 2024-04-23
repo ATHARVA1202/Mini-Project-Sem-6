@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Press+Start+2P&display=swap" rel="stylesheet"></head>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark" style="position: fixed; top: 0; z-index: 10; width: 100%;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <span>Secure Social</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ url_for('index') }}" style="margin-left: 840px; margin-right: 10px;">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-left: 10px; margin-right: 10px;">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-left: 10px; margin-right: 10px;">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="margin-left: 10px; margin-right: 10px;">Why Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}" style="margin-left: 10px; margin-right: 10px;">Login/Register</a>
+            </ul>  
+          </div>
+        </div>
+      </nav>
+    <h1 class="options-text" style="margin-top: 100px;">Algorithm Testing</h1>
+    <div class="container">
+        <div class="sections">
+            <form method="POST" action="/predict_manual">
+                <div class="form-columns-container">
+                    <div class="form-column-1">
+                        <label for="edge_followed_by">edge followed by:</label>
+                        <input class="form-box-smaller" type="" name="edge_followed_by" required>
+            
+                        <label for="edge_follow">edge follow:</label>
+                        <input class="form-box-smaller" type="" name="edge_follow" required>
+            
+                        <label for="username_length">username length</label>
+                        <input class="form-box-smaller" type="number" name="username_length" required>
+            
+                        <label for="username_has_number">username has number:</label>
+                        <input class="form-box-smaller" type="number" name="username_has_number" required>
+            
+                        <label for="full_name_has_number">full name has number:</label>
+                        <input class="form-box-smaller" type="number" name="full_name_has_number" required>
+                    </div>
+            
+                    <div class="form-column-2">
+                        <label for="full_name_length">full name length:</label>
+                        <input class="form-box-smaller" type="number" name="full_name_length" required>
+            
+                        <label for="is_private">is_private:</label>
+                        <input class="form-box-smaller" type="number" name="is_private" required>
+            
+                        <label for="is_business_account">is business account:</label>
+                        <input class="form-box-smaller" type="number" name="is_business_account" required>
+            
+                        <label for="has_external_url">has external url:</label>
+                        <input class="form-box-smaller" type="number" name="has_external_url" required>
+            
+                        <!-- <label for="num_followers">Number of Followers:</label>
+                        <input class="form-box-smaller" type="number" name="num_followers" required>
+            
+                        <label for="num_follows">Number of Follows:</label>
+                        <input class="form-box-smaller" type="number" name="num_follows" required> -->
+                    </div>            
+                    <div style="clear: both;"></div> <!-- Clear float after columns -->
+                        <input class="submit-button" id="submit-form-button" type="submit" value="Predict" style="margin: 25px;">
+                </form>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

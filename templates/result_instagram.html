@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sections">
+            <h1>Result</h1>
+            <h3 class="result-text"><strong>Prediction:</strong> {{ prediction }}</h3>
+            <h2>Instagram Profile Data</h2>
+            <ul>
+                <br><li><strong>edge followed by:</strong> {{ data['edge_followed_by'] }}</li><br>
+                <li><strong>edge follow:</strong> {{ data['edge_follow'] }}</li><br>
+                <li><strong>username length:</strong> {{ data['username_length'] }}</li><br>
+                <li><strong>username has number:</strong> {{ data['username_has_number'] }}</li><br>
+                <li><strong>full name has number:</strong> {{ data['full_name_has_number'] }}</li><br>
+                <li><strong>full name length:</strong> {{ data['full_name_length'] }}</li><br>
+                <!-- <li><strong>Numerical Chars in Username:</strong> {{ data['Numerical Chars in Username'] }}</li> -->
+                <li><strong>is private:</strong> {{ data['is_private'] }}</li><br>
+                <li><strong>is business account:</strong> {{ data['is_business_account'] }}</li><br>
+                <li><strong>has external url:</strong> {{ data['has_external_url'] }}</li><br>
+                <!-- Using NLP to compare username and fullname -->
+                <br><h3>Using Sequence Matcher (NLP) to compare username and fullname</h3>
+                <li><strong>Username Full Name Similarity:</strong> {{ data['username_full_name_similarity'] }}</li>
+                <!-- <br><h3>Previous Features</h3>
+                <li><strong>Numerical Chars in Full Name:</strong> {{ data['Numerical Chars in Full Name'] }}</li>
+                <li><strong>Full Name Length:</strong> {{ data['Full Name Length'] }}</li>
+                <li><strong>Same Username and Full Name:</strong> {{ data['Same Username and Full Name'] }}</li>
+                <li><strong>Description Length:</strong> {{ data['Description Length'] }}</li>
+                <li><strong>External URL:</strong> {{ data['External URL'] }}</li>
+                <li><strong>Private:</strong> {{ data['Private'] }}</li>
+                <li><strong>Number of Posts:</strong> {{ data['Number of Posts'] }}</li> -->
+                
+            </ul>
+            <form id="flag-form" method="POST" action="{{ url_for('flag_instagram_account', username=data['Username']) }}">
+                <!-- {{message}} -->
+                <!-- <div class="g-recaptcha" data-sitekey="6LeS9oUoAAAAAE3h8nM5RXe5X-wlgdt41DRIUpaE"></div> -->
+                <br/>          
+                <button class="flag-button" type="submit" value="Submit" onclick="return checkRecaptcha()">Flag Account</button>
+            </form>            
+        </div>
+        <script>
+            function checkRecaptcha() {
+                var recaptchaResponse = grecaptcha.getResponse();
+                
+                // Check if reCAPTCHA has been successfully completed
+                if (recaptchaResponse.length === 0) {
+                    // If reCAPTCHA is not completed, show an error message or alert
+                    alert('Please complete the reCAPTCHA before submitting the form.');
+                    return false; // Prevent the form from being submitted
+                }
+                
+                // If reCAPTCHA is completed, allow the form to be submitted
+                return true;
+            }
+        </script>
+        </div>
+</body>
+</html>
